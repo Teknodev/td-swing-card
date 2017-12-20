@@ -1,3 +1,72 @@
 page-home {
 
+    $card-width : 80% !default;
+    $card-height :  400px !default;
+    $card-stack-difference : 15px !default;
+    $card-stack-visible : 3 !default;
+
+    [swing-viewport]
+    {
+        position: relative;
+
+        [swing-stack]
+        {
+            list-style: none;
+            width: 80%;
+            height: 450px;
+
+            [swing-card]{
+                position: absolute;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                background: #fff;
+                color: #000;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                width: $card-width;
+                height: $card-height;
+                transition: height,width 100ms ease-in-out;
+                
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: 0 auto;
+
+                @for $i from 1 to ($card-stack-visible + 1) {
+
+                    &:nth-last-child(#{$i})
+                    {
+                        display: flex;
+                        height: calc( #{$card-height} +  #{$card-stack-difference} * #{$i});
+                        width: calc( #{$card-width} +  #{$card-stack-difference} * #{$i});
+                    }
+                }
+            }
+        }
+    
+    }
+
+
+    [actions]
+    {
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button{
+            width: 40%;
+            cursor: pointer;
+
+            &:nth-child(1)
+            {
+                background: red;
+            }
+
+            &:nth-child(2)
+            {
+                background: green;
+            }
+        }
+    }
 }
