@@ -38,6 +38,7 @@ export class HomePage {
 
   pass()
   {
+    if(this.stack.cards.length<1) return;
     let card = this.stack.cards.last;
     card.elementRef.nativeElement.classList.add('pass');
     card.throwLeft();
@@ -45,6 +46,7 @@ export class HomePage {
 
   meet()
   {
+    if(this.stack.cards.length<1) return;
     let card = this.stack.cards.last;
     card.elementRef.nativeElement.classList.add('meet');
     card.throwRight();
