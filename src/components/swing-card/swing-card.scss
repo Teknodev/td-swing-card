@@ -1,0 +1,8 @@
+swing-card {
+    position: absolute;
+    transition: height , width 400ms ease-in-out;
+
+    &.destroyed{
+        display: none;
+    }
+}

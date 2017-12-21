@@ -7,15 +7,33 @@
 </ion-header>
 
 <ion-content padding>
-  <div swing-viewport>
-    <ul swing-stack (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)">
-      <li swing-card *ngFor="let c of cardsDummy">{{ c.name }}</li>
-    </ul>
+  
+  <div viewport>
+
+    <swing-stack [config]="config">
+
+      <ng-container *ngFor="let card of cardsDummy">
+
+          <swing-card *swing-card>
+            <img [src]="card.picture">
+            <p>{{ card.name }}</p>
+            <p>{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+              
+          </swing-card>
+
+      </ng-container>
+     
+    </swing-stack>
+
+
   </div>
 
+
   <div actions>
-      <button ion-button (tap)="voteUp()">Pass</button>
-      <button ion-button (tap)="voteUp()">Meet</button>
+      <button ion-button (tap)="pass()">Pass</button>
+      <button ion-button (tap)="meet(1)">Meet</button>
   </div>
+  <button block ion-button (tap)="add(1)">Add new item</button>
   
 </ion-content>

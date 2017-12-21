@@ -1,54 +1,64 @@
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SwingStackComponent, SwingCardComponent } from 'angular2-swing'
+import { SwingStackComponent } from '../../components/swing-stack/swing-stack';
+
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
 
   @ViewChild(SwingStackComponent) stack : SwingStackComponent;
-  @ViewChildren(SwingCardComponent) cards : QueryList<SwingCardComponent>;
+
 
   cardsDummy: Array<any> = [
     { 
       name: 'Nancy Ahmad',
-      picture : '',
+      picture : 'https://api.adorable.io/avatars/200/abott@adorable.png',
       position : 'Human Resources Manager',
       description :  "Guiatr Learning",
+      feedback: null
     },
     { 
       name: 'Nancy Ahmad',
-      picture : '',
+      picture : 'https://api.adorable.io/avatars/285/sad.png',
       position : 'Human Resources Manager',
       description :  "Guiatr Learning",
-    },
-    { 
-      name: 'Nancy Ahmad',
-      picture : '',
-      position : 'Human Resources Manager',
-      description :  "Guiatr Learning",
-    },
-        { 
-      name: 'Nancy Ahmad',
-      picture : '',
-      position : 'Human Resources Manager',
-      description :  "Guiatr Learning",
+      feedback: null
     }
   ]
-  constructor(public navCtrl: NavController) {
+  
+  config = {
+    throwOutConfidence: function (xOffset, yOffset, element) {
+      console.log(xOffset,yOffset,element.offsetWidth);
+        return Math.min(Math.abs(xOffset) / (element.offsetWidth / 4.5 ), 1);
+    }
+  };
 
+  pass()
+  {
+    let card = this.stack.cards.last;
+    card.elementRef.nativeElement.classList.add('pass');
+    card.throwLeft();
   }
 
-  voteUp(operation : boolean)
+  meet()
   {
-    if(operation)
-    {
+    let card = this.stack.cards.last;
+    card.elementRef.nativeElement.classList.add('meet');
+    card.throwRight();
+  }
 
-    }
-    console.log(this.cards.last.getCard());
-
+  add()
+  {
+    this.cardsDummy.push( { 
+      name: 'Nancy Ahmad',
+      picture : 'https://picsum.photos/200/200',
+      position : 'Human Resources Manager',
+      description :  "Guiatr Learning",
+      feedback: null
+    });
   }
 
 }
